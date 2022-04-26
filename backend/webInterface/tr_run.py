@@ -113,10 +113,14 @@ class TrRun(tornado.web.RequestHandler):
 
         # 进行ocr
         res = tr.run(img.copy().convert("L"), flag=tr.FLAG_ROTATED_RECT)
+        
+        tmp = []
+        for data in res:
+            tmp.append({'value': data[1], 'confidence': data[2]})
 
         response_data = {'code': 200, 'msg': '成功',
-                         'data': {'raw_out': res,
-                                  'speed_time': round(time.time() - start_time, 2)}}
+                         'data': tmp}
+
         if is_draw != '0':
             img_detected = img.copy()
             img_draw = ImageDraw.Draw(img_detected)
