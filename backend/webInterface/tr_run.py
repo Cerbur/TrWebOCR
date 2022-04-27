@@ -115,7 +115,7 @@ class TrRun(tornado.web.RequestHandler):
         res = tr.run(img.copy().convert("L"), flag=tr.FLAG_ROTATED_RECT)
         
         tmp = []
-        if not res:
+        if res:
             for data in res:
                 tmp.append({'value': data[1], 'confidence': data[2]})
 
