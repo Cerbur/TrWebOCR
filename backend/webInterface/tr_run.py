@@ -120,7 +120,8 @@ class TrRun(tornado.web.RequestHandler):
                 tmp.append({'value': data[1], 'confidence': data[2]})
 
         response_data = {'code': 200, 'msg': '成功',
-                         'data': tmp}
+                         'data': {'raw_out': tmp,
+                                  'speed_time': round(time.time() - start_time, 2)}}
 
         if is_draw != '0':
             img_detected = img.copy()
